@@ -1,16 +1,13 @@
-export function getData(urls: string[], sendData:any) {
+export async function getData(urls: string[]) {
     const promises: Array<any> = [];
 
     urls.forEach(url => {
         promises.push(
-            new Promise((res, rej) => {res(fetch(url)
+            new Promise((res) => {res(fetch(url)
                 .then(response => response.json()
                 ))})
         )
     })
 
-    Promise.all(promises)
-        .then(results => {
-            sendData(results)
-        })
+    return await Promise.all(promises)
 }

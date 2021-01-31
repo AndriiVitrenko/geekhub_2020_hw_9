@@ -2,14 +2,13 @@ import {useState, useEffect} from 'react';
 import {getData} from './services/api'
 
 function App() {
-  const urls: string[] = ['https://reqres.in/api/users/2', 'http://jsonplaceholder.typicode.com/posts/1', 'https://api.mocki.io/v1/b043df5a']
-  const [dataArray, setDataArray] = useState([])
+  const urls = ['https://reqres.in/api/users/2', 'http://jsonplaceholder.typicode.com/posts/1', 'https://api.mocki.io/v1/b043df5a']
+  const [dataArray, setDataArray] = useState<any>([])
 
   useEffect(
     () => {
-      getData(urls, setDataArray)
-    }
-    , [])
+      getData(urls).then(result => setDataArray(result))
+    })
 
   return (
     <div className="App">
