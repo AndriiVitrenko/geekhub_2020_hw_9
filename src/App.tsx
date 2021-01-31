@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react';
+import {getData} from './services/api'
 
 function App() {
+  const urls: string[] = ['https://reqres.in/api/users/2', 'http://jsonplaceholder.typicode.com/posts/1', 'https://api.mocki.io/v1/b043df5a']
+  const [dataArray, setDataArray] = useState([])
+
+  useEffect(
+    () => {
+      getData(urls, setDataArray)
+    }
+    , [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <thead>
+          <tr>
+          <th className="table_heading">site</th>
+          <th className="table_heading">data</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          {
+            urls.map((url, i) => {
+              return <tr key={i}>
+                <td>{url}</td>
+                <td><pre>{JSON.stringify(dataArray[i], null, 2)}</pre></td>
+              </tr>
+            })
+          }
+        </tbody>
+      </table>
     </div>
   );
 }
