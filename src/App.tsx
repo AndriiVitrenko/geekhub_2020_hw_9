@@ -7,7 +7,8 @@ function App() {
 
   useEffect(
     () => {
-      getData(urls, setDataArray)
+      getData(urls)
+        .then(results => setDataArray(results))
     })
 
   return (
