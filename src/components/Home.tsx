@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className="App">
-      {dataArray.length > 0 ? '' : <Spinner />}
+      {dataArray.length <= 0 && <Spinner />}
       <Table dataArray={dataArray} />
     </div>
   );
